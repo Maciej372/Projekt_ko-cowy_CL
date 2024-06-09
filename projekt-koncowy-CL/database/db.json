@@ -1,5 +1,11 @@
 {
-  "login": [{ "id": 1, "username": "Admin", "password": "Admin1234!" }],
+  "login": [
+    {
+      "id": 1,
+      "username": "Admin",
+      "password": "Admin1234!"
+    }
+  ],
   "users": [
     {
       "id": 1,
@@ -36,6 +42,18 @@
       "name": "Maciej",
       "surname": "Maciejak",
       "exercises": "kompetencje językowe"
+    },
+    {
+      "id": 7,
+      "name": "wfwf",
+      "surname": "34f34f",
+      "exercises": "zajęcia korekcyjno-kompensacyjne"
+    },
+    {
+      "id": 8,
+      "name": "Adaś",
+      "surname": "Adasiowski",
+      "exercises": "motoryka duża"
     }
   ]
 }
