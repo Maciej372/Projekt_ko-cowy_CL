@@ -1,6 +1,41 @@
 {
-  "password": [
-    { "id": 1, "name": "John Doe" },
-    { "id": 2, "name": "Jane Doe" }
+  "login": [{ "id": 1, "username": "Admin", "password": "Admin1234!" }],
+  "users": [
+    {
+      "id": 1,
+      "name": "Adam",
+      "surname": "Adamowski",
+      "exercises": "terapia ręki"
+    },
+    {
+      "id": 2,
+      "name": "Jan",
+      "surname": "Janowski",
+      "exercises": "logopedia"
+    },
+    {
+      "id": 3,
+      "name": "Tomasz",
+      "surname": "Tomkowski",
+      "exercises": "zajęcia korekcyjno-kompensacyjne"
+    },
+    {
+      "id": 4,
+      "name": "Jacek",
+      "surname": "Jackowski",
+      "exercises": "motoryka duża"
+    },
+    {
+      "id": 5,
+      "name": "Filip",
+      "surname": "Filipiak",
+      "exercises": "motoryka mała"
+    },
+    {
+      "id": 6,
+      "name": "Maciej",
+      "surname": "Maciejak",
+      "exercises": "kompetencje językowe"
+    }
   ]
 }
