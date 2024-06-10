@@ -24,13 +24,13 @@ const Calendar = () => {
 
   return (
     <div>
-      <h2>Kalendarz</h2>
+      <h2 style={{ padding: "10px", marginTop: "50px" }}>Kalendarz</h2>
       <BigCalendar
         localizer={localizer}
         events={activities}
         startAccessor="start"
         endAccessor="end"
-        style={{ height: 500 }} // Dostosuj wysokość kalendarza
+        style={{ height: 500, padding: "10px", marginTop: "50px" }} // Dostosuj wysokość kalendarza
         tooltipAccessor={() => "uwaga"} // Ustawienie treści tooltipu
       />
     </div>

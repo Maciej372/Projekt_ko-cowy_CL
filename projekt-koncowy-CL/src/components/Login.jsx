@@ -36,6 +36,7 @@ const LoginForm = () => {
       justifyContent: "center",
       height: "100vh",
       backgroundColor: "#242424",
+      color: "#333",
     },
     formContainer: {
       backgroundColor: "#fff",

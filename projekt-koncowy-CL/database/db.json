@@ -38,25 +38,11 @@
       "exercises": "motoryka mała"
     },
     {
-      "id": "7",
-      "name": "Jan",
-      "surname": "Jankowski",
-      "exercises": "",
-      "start": "new Date(2024, 4, 25, 10, 0)"
-    },
-    {
-      "id": "8",
-      "name": "kdkkd",
-      "surname": "wecwec",
+      "id": "6",
+      "name": "ererf",
+      "surname": "erferf",
       "exercises": "motoryka mała",
-      "start": "new Date(2024, 5, 30, 10, 0)"
-    },
-    {
-      "id": "9",
-      "name": "erverv",
-      "surname": "erevr",
-      "exercises": "motoryka duża",
-      "start": "new Date(2024, 6, 1, 13, 19)"
+      "start": "new Date(2024, 5, 17, 12, 0)"
     }
   ]
 }

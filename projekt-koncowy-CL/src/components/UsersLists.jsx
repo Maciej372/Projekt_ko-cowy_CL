@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import AddStudents from "./AddStudent";
+import UserDetails from "./StudentInfo";
 
 const UserTable = () => {
   const [users, setUsers] = useState([]);
   const [showAddStudent, setShowAddStudent] = useState(false);
+  const [selectedUserId, setSelectedUserId] = useState(null); // Stan przechowujący ID wybranego użytkownika
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -52,8 +54,15 @@ const UserTable = () => {
     setShowAddStudent(true);
   };
 
+  const handleUserClick = (id) => {
+    setSelectedUserId(id); // Ustawia wybrane ID użytkownika
+  };
+
   const styles = {
     table: {
+      height: 500,
+      padding: "10px",
+      marginTop: "50px",
       width: "100%",
       borderCollapse: "collapse",
       color: "black",
@@ -83,47 +92,53 @@ const UserTable = () => {
 
   return (
     <div>
-      {!showAddStudent ? (
-        <>
-          <h2>Lista użytkowników</h2>
-          <table style={styles.table}>
-            <thead>
-              <tr>
-                <th style={styles.th}>Lp.</th>
-                <th style={styles.th}>Name</th>
-                <th style={styles.th}>Surname</th>
-                <th style={styles.th}>Exercise</th>
-                <th style={styles.th}>Akcje</th>
-              </tr>
-            </thead>
-            <tbody>
-              {users.map((user, index) => (
-                <tr key={user.id}>
-                  <td style={styles.td}>{index + 1}</td>
-                  <td style={styles.td}>{user.name}</td>
-                  <td style={styles.td}>
-                    <a href="www.google.com">{user.surname}</a>
-                  </td>
-                  <td style={styles.td}>{user.exercises}</td>
-                  <td style={styles.td}>
-                    <button
-                      style={styles.button}
-                      onClick={() => handleDelete(user.id)}
-                    >
-                      Usuń
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <button style={styles.button} onClick={handleAdd}>
-            Dodaj
-          </button>
-        </>
+      {selectedUserId ? ( // Jeśli wybrano użytkownika, wyświetl komponent UserDetails
+        <UserDetails userId={selectedUserId} />
       ) : (
-        <AddStudents />
+        !showAddStudent && (
+          <>
+            <h2>Lista użytkowników</h2>
+            <table style={styles.table}>
+              <thead>
+                <tr>
+                  <th style={styles.th}>Lp.</th>
+                  <th style={styles.th}>Name</th>
+                  <th style={styles.th}>Surname</th>
+                  <th style={styles.th}>Exercise</th>
+                  <th style={styles.th}>Akcje</th>
+                </tr>
+              </thead>
+              <tbody>
+                {users.map((user, index) => (
+                  <tr key={user.id}>
+                    <td style={styles.td}>{index + 1}</td>
+                    <td style={styles.td}>{user.name}</td>
+                    <td style={styles.td}>
+                      {/* Dodaj onClick do linku */}
+                      <a href="#" onClick={() => handleUserClick(user.id)}>
+                        {user.surname}
+                      </a>
+                    </td>
+                    <td style={styles.td}>{user.exercises}</td>
+                    <td style={styles.td}>
+                      <button
+                        style={styles.button}
+                        onClick={() => handleDelete(user.id)}
+                      >
+                        Usuń
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <button style={styles.button} onClick={handleAdd}>
+              Dodaj
+            </button>
+          </>
+        )
       )}
+      {showAddStudent && <AddStudents />}
     </div>
   );
 };
