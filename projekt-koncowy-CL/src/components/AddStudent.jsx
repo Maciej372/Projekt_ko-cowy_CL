@@ -7,6 +7,7 @@ const AddStudents = () => {
   const [exercises, setExercises] = useState("");
   const [lastId, setLastId] = useState(null);
   const [studentAdded, setStudentAdded] = useState(false);
+  const [startDate, setStartDate] = useState("");
 
   useEffect(() => {
     const fetchLastId = async () => {
@@ -44,12 +45,25 @@ const AddStudents = () => {
     setExercises(e.target.value);
   };
 
+  const handleStartDateChange = (e) => {
+    setStartDate(e.target.value);
+  };
+
   const handleSubmit = async () => {
     // Sprawdź, czy lastId zostało ustawione
     if (lastId === null) {
       console.error("Nie można dodawać użytkowników. Brak danych o ID.");
       return;
     }
+
+    // Funkcja konwersji formatu daty
+    const convertToServerDateFormat = (dateString) => {
+      const date = new Date(dateString);
+      return `new Date(${date.getFullYear()}, ${date.getMonth()}, ${date.getDate()}, ${date.getHours()}, ${date.getMinutes()})`;
+    };
+
+    // Konwersja daty rozpoczęcia zajęć do formatu wymagającego przez serwer
+    const formattedStartDate = convertToServerDateFormat(startDate);
 
     try {
       const response = await fetch("http://localhost:3000/users", {
@@ -61,7 +75,8 @@ const AddStudents = () => {
           id: lastId + 1,
           name,
           surname,
-          exercises, // Dodanie wybranych ćwiczeń do danych wysyłanych do serwera
+          exercises,
+          start: formattedStartDate,
         }),
       });
 
@@ -109,6 +124,13 @@ const AddStudents = () => {
             <option value="motoryka mała">Motoryka mała</option>
             <option value="kompetencje językowe">Kompetencje językowe</option>
           </select>
+          <label htmlFor="startDate">Data rozpoczęcia zajęć:</label>
+          <input
+            type="datetime-local"
+            id="startDate"
+            value={startDate}
+            onChange={handleStartDateChange}
+          />
           <button onClick={handleSubmit}>Dodaj</button>
         </div>
       )}
