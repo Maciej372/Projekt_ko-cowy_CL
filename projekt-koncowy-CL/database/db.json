@@ -38,27 +38,21 @@
       "exercises": "motoryka mała"
     },
     {
-      "id": "6",
-      "name": "Maciej",
-      "surname": "Maciejak",
-      "exercises": "kompetencje językowe"
-    },
-    {
-      "id": 7,
+      "id": "7",
       "name": "Jan",
       "surname": "Jankowski",
       "exercises": "",
       "start": "new Date(2024, 4, 25, 10, 0)"
     },
     {
-      "id": 8,
+      "id": "8",
       "name": "kdkkd",
       "surname": "wecwec",
       "exercises": "motoryka mała",
       "start": "new Date(2024, 5, 30, 10, 0)"
     },
     {
-      "id": 9,
+      "id": "9",
       "name": "erverv",
       "surname": "erevr",
       "exercises": "motoryka duża",

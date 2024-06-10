@@ -72,7 +72,7 @@ const AddStudents = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          id: lastId + 1,
+          id: (lastId + 1).toString(),
           name,
           surname,
           exercises,

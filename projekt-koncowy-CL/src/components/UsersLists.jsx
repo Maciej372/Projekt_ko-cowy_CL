@@ -23,6 +23,12 @@ const UserTable = () => {
   }, []);
 
   const handleDelete = async (id) => {
+    // Potwierdzenie usunięcia
+    const confirmDelete = window.confirm(
+      "Czy na pewno chcesz usunąć tego użytkownika?"
+    );
+    if (!confirmDelete) return;
+
     try {
       const response = await fetch(`http://localhost:3000/users/${id}`, {
         method: "DELETE",
