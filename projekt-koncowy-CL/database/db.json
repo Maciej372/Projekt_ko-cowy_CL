@@ -13,34 +13,6 @@
       "surname": "Adamowski",
       "exercises": "terapia ręki",
       "start": "new Date(2024, 5, 19, 21, 9)"
-    },
-    {
-      "id": "2",
-      "name": "Jan",
-      "surname": "Janowski",
-      "exercises": "logopedia",
-      "start": "new Date(2024, 5, 19, 21, 9)"
-    },
-    {
-      "id": "3",
-      "name": "Ja",
-      "surname": "Testowy",
-      "exercises": "motoryka duża",
-      "start": "new Date(2024, 6, 17, 10, 30)"
-    },
-    {
-      "id": "8",
-      "name": "erg",
-      "surname": "ergerg",
-      "exercises": "motoryka duża",
-      "start": "new Date(2024, 6, 27, 11, 44)"
-    },
-    {
-      "id": "9",
-      "name": "Maciej",
-      "surname": "Testowy",
-      "exercises": "logopedia",
-      "start": "new Date(2024, 7, 1, 13, 0)"
     }
   ]
 }

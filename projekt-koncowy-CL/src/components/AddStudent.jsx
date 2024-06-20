@@ -8,6 +8,12 @@ const AddStudents = () => {
   const [lastId, setLastId] = useState(null);
   const [studentAdded, setStudentAdded] = useState(false);
   const [startDate, setStartDate] = useState("");
+  const [errors, setErrors] = useState({
+    name: "",
+    surname: "",
+    exercises: "",
+    startDate: "",
+  });
 
   useEffect(() => {
     const fetchLastId = async () => {
@@ -48,11 +54,53 @@ const AddStudents = () => {
   };
 
   const handleSubmit = async () => {
+    // Resetowanie stanu błędów
+    setErrors({
+      name: "",
+      surname: "",
+      exercises: "",
+      startDate: "",
+    });
+
+    // Walidacja pól
+    let formIsValid = true;
+    if (name.trim() === "") {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        name: "Pole 'Imię' jest wymagane.",
+      }));
+      formIsValid = false;
+    }
+    if (surname.trim() === "") {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        surname: "Pole 'Nazwisko' jest wymagane.",
+      }));
+      formIsValid = false;
+    }
+    if (exercises === "...") {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        exercises: "Wybierz rodzaj ćwiczeń.",
+      }));
+      formIsValid = false;
+    }
+    if (startDate.trim() === "") {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        startDate: "Pole 'Data rozpoczęcia zajęć' jest wymagane.",
+      }));
+      formIsValid = false;
+    }
+
+    if (!formIsValid) {
+      return;
+    }
+
     if (lastId === null) {
       console.error("Nie można dodawać użytkowników. Brak danych o ID.");
       return;
     }
-
     const convertToServerDateFormat = (dateString) => {
       const date = new Date(dateString);
       return `new Date(${date.getFullYear()}, ${
@@ -92,7 +140,7 @@ const AddStudents = () => {
     <div className="bg-gray-800 min-h-screen flex flex-col justify-center items-center">
       {!studentAdded && (
         <div className="w-full max-w-md bg-white p-4 rounded-lg shadow-lg">
-          {/* <h2 className="text-2xl text-gray-900 mb-4">Dodaj podopiecznego</h2> */}
+          <h2 className="text-2xl text-gray-900 mb-4">Dodaj podopiecznego</h2>
           <label htmlFor="name" className="block text-gray-700 mb-2">
             Imię:
           </label>
@@ -101,8 +149,12 @@ const AddStudents = () => {
             id="name"
             value={name}
             onChange={handleNameChange}
-            className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
+            required
+            className={`w-full px-4 py-2 rounded-md border ${
+              errors.name ? "border-red-500" : "border-gray-300"
+            } focus:outline-none focus:border-blue-500`}
           />
+          {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
           <label htmlFor="surname" className="block text-gray-700 mb-2 mt-4">
             Nazwisko:
           </label>
@@ -111,8 +163,14 @@ const AddStudents = () => {
             id="surname"
             value={surname}
             onChange={handleSurnameChange}
-            className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
+            required
+            className={`w-full px-4 py-2 rounded-md border ${
+              errors.surname ? "border-red-500" : "border-gray-300"
+            } focus:outline-none focus:border-blue-500`}
           />
+          {errors.surname && (
+            <p className="text-red-500 text-sm">{errors.surname}</p>
+          )}
           <label htmlFor="exercises" className="block text-gray-700 mb-2 mt-4">
             Ćwiczenia:
           </label>
@@ -120,7 +178,10 @@ const AddStudents = () => {
             id="exercises"
             value={exercises}
             onChange={handleExercisesChange}
-            className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
+            required
+            className={`w-full px-4 py-2 rounded-md border ${
+              errors.exercises ? "border-red-500" : "border-gray-300"
+            } focus:outline-none focus:border-blue-500`}
           >
             <option value="...">...</option>
             <option value="terapia ręki">Terapia ręki</option>
@@ -132,6 +193,9 @@ const AddStudents = () => {
             <option value="motoryka mała">Motoryka mała</option>
             <option value="kompetencje językowe">Kompetencje językowe</option>
           </select>
+          {errors.exercises && (
+            <p className="text-red-500 text-sm">{errors.exercises}</p>
+          )}
           <label htmlFor="startDate" className="block text-gray-700 mb-2 mt-4">
             Data rozpoczęcia zajęć:
           </label>
@@ -140,8 +204,14 @@ const AddStudents = () => {
             id="startDate"
             value={startDate}
             onChange={handleStartDateChange}
-            className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
+            required
+            className={`w-full px-4 py-2 rounded-md border ${
+              errors.startDate ? "border-red-500" : "border-gray-300"
+            } focus:outline-none focus:border-blue-500`}
           />
+          {errors.startDate && (
+            <p className="text-red-500 text-sm">{errors.startDate}</p>
+          )}
           <button
             onClick={handleSubmit}
             className="w-full mt-4 bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600 transition duration-300"

@@ -45,7 +45,7 @@ const TableRow = ({ date, index, onStatusChange, onDateClick, note }) => {
           className="icon-button"
         >
           <div>
-            <FcCheckmark className="text-green-600" />
+            <FcCheckmark className="text-green-600 w-[45px]" />
           </div>
         </button>
         <button

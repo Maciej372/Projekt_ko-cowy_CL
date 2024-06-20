@@ -3,7 +3,7 @@ import TableRow from "./StudentInfoNotes";
 import NoteAdder from "./NoteAdder";
 import { fetchUserDetails } from "../fetchUserDetails";
 
-const UserDetails = ({ userId }) => {
+const UserDetails = ({ userId, onBack }) => {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
   const [statuses, setStatuses] = useState(Array(10).fill(null));
@@ -17,6 +17,8 @@ const UserDetails = ({ userId }) => {
       userId,
       (data) => {
         setUser(data);
+        if (data.statuses) setStatuses(data.statuses);
+        if (data.notes) setNotes(data.notes);
       },
       (error) => {
         setError(error.message);
@@ -24,6 +26,39 @@ const UserDetails = ({ userId }) => {
       }
     );
   }, [userId]);
+
+  // Funkcja do aktualizacji danych użytkownika na serwerze
+  const updateUserDetails = () => {
+    if (!user) return; // Zabezpieczenie na wypadek, gdy user nie jest jeszcze załadowany
+
+    const updatedUser = {
+      ...user,
+      statuses,
+      notes,
+    };
+
+    fetch(`http://localhost:3000/users/${userId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedUser),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(
+            "Wystąpił problem podczas aktualizacji danych użytkownika."
+          );
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Dane użytkownika zostały zaktualizowane:", data);
+      })
+      .catch((error) => {
+        console.error("Błąd podczas aktualizacji danych użytkownika:", error);
+      });
+  };
 
   const generateWeeklyDates = (startDate, numberOfWeeks) => {
     const dates = [];
@@ -91,6 +126,20 @@ const UserDetails = ({ userId }) => {
 
   return (
     <div className="bg-gray-100 p-4 rounded-lg shadow-lg">
+      <div className="mb-[10px]">
+        <button
+          className="bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-md transition duration-300 mr-[15px] ml-[250px]"
+          onClick={updateUserDetails}
+        >
+          Zapisz
+        </button>
+        <button
+          className="bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-md transition duration-300 font-bold mt-0"
+          onClick={onBack}
+        >
+          X
+        </button>
+      </div>
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-2xl font-bold text-gray-900 mb-4">{`${user.name} ${user.surname}`}</h1>
@@ -98,9 +147,6 @@ const UserDetails = ({ userId }) => {
             {user.exercises}
           </h2>
         </div>
-        <button className="bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-md transition duration-300">
-          Zapisz
-        </button>
       </div>
 
       <table className="w-full mb-4">
