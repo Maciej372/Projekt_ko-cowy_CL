@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import AddStudents from "./AddStudent";
 import UserDetails from "./StudentInfo";
+import { RiDeleteBack2Line } from "react-icons/ri";
+import { FaPlus } from "react-icons/fa";
 
 const UserTable = () => {
   const [users, setUsers] = useState([]);
@@ -68,7 +70,7 @@ const UserTable = () => {
   };
 
   return (
-    <div className="bg-gray-800 min-h-screen flex flex-col justify-center items-center">
+    <div className="bg-gray-800 min-h-screen flex flex-col justify-start items-center mt-[100px]">
       {currentView === "userDetails" && (
         <UserDetails userId={selectedUserId} onBack={onBack} />
       )}
@@ -106,9 +108,10 @@ const UserTable = () => {
                   <td className="px-6 py-4">
                     <button
                       onClick={() => handleDelete(user.id)}
+                      title="Usuń"
                       className="px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition duration-300"
                     >
-                      Usuń
+                      <RiDeleteBack2Line className="w-[25px] h-[25px]" />
                     </button>
                   </td>
                 </tr>
@@ -117,9 +120,10 @@ const UserTable = () => {
           </table>
           <button
             onClick={handleAdd}
+            title="Dodaj"
             className="mt-4 px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition duration-300"
           >
-            Dodaj
+            <FaPlus className="w-[25px] h-[25px] p-[1px]" />
           </button>
         </>
       )}

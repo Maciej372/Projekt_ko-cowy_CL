@@ -13,6 +13,67 @@
       "surname": "Adamowski",
       "exercises": "terapia ręki",
       "start": "new Date(2024, 5, 19, 21, 9)"
+    },
+    {
+      "id": "2",
+      "name": "Maciej",
+      "surname": "Gromadziński",
+      "exercises": "motoryka duża",
+      "start": "new Date(2024, 7, 6, 23, 12)",
+      "statuses": [
+        "present",
+        "absent",
+        "present",
+        "present",
+        "absent",
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "notes": [
+        {
+          "text": "FZHGJGUJHGHJIJH",
+          "status": "present"
+        },
+        {
+          "text": "2",
+          "status": "absent"
+        },
+        {
+          "text": "3",
+          "status": "present"
+        },
+        {
+          "text": "4",
+          "status": "present"
+        },
+        {
+          "text": "5",
+          "status": "absent"
+        },
+        {
+          "text": "",
+          "status": null
+        },
+        {
+          "text": "",
+          "status": null
+        },
+        {
+          "text": "",
+          "status": null
+        },
+        {
+          "text": "",
+          "status": null
+        },
+        {
+          "text": "",
+          "status": null
+        }
+      ]
     }
   ]
 }

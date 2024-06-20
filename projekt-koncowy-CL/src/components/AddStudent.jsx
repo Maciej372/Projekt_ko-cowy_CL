@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import UserTable from "./UserTable";
+import { GiSave } from "react-icons/gi";
 
 const AddStudents = () => {
   const [name, setName] = useState("");
@@ -137,7 +138,7 @@ const AddStudents = () => {
   };
 
   return (
-    <div className="bg-gray-800 min-h-screen flex flex-col justify-center items-center">
+    <div className="bg-gray-800 min-h-screen flex flex-col justify-start items-center">
       {!studentAdded && (
         <div className="w-full max-w-md bg-white p-4 rounded-lg shadow-lg">
           <h2 className="text-2xl text-gray-900 mb-4">Dodaj podopiecznego</h2>
@@ -214,9 +215,10 @@ const AddStudents = () => {
           )}
           <button
             onClick={handleSubmit}
-            className="w-full mt-4 bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600 transition duration-300"
+            title="Dodaj"
+            className=" flex justify-center w-full mt-4 bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600 transition duration-300"
           >
-            Dodaj
+            <GiSave className="w-[25px] h-[25px] p-[1px]" />
           </button>
         </div>
       )}

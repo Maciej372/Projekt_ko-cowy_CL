@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import TableRow from "./StudentInfoNotes";
 import NoteAdder from "./NoteAdder";
 import { fetchUserDetails } from "../fetchUserDetails";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 const UserDetails = ({ userId, onBack }) => {
   const [user, setUser] = useState(null);
@@ -10,7 +11,7 @@ const UserDetails = ({ userId, onBack }) => {
   const [notes, setNotes] = useState(
     Array(10).fill({ text: "", status: null })
   );
-  const [selectedDateIndex, setSelectedDateIndex] = useState(null);
+  const [selectedNoteIndex, setSelectedNoteIndex] = useState(null);
 
   useEffect(() => {
     fetchUserDetails(
@@ -95,19 +96,19 @@ const UserDetails = ({ userId, onBack }) => {
     setNotes(newNotes);
   };
 
-  const handleDateClick = (index) => {
-    setSelectedDateIndex(index);
+  const handleNoteClick = (index) => {
+    setSelectedNoteIndex(index);
   };
 
   const handleSaveNote = (text) => {
     const newNotes = [...notes];
-    newNotes[selectedDateIndex] = { ...newNotes[selectedDateIndex], text };
+    newNotes[selectedNoteIndex] = { ...newNotes[selectedNoteIndex], text };
     setNotes(newNotes);
-    setSelectedDateIndex(null);
+    setSelectedNoteIndex(null);
   };
 
   const handleCancelNote = () => {
-    setSelectedDateIndex(null);
+    setSelectedNoteIndex(null);
   };
 
   if (error) {
@@ -126,20 +127,7 @@ const UserDetails = ({ userId, onBack }) => {
 
   return (
     <div className="bg-gray-100 p-4 rounded-lg shadow-lg">
-      <div className="mb-[10px]">
-        <button
-          className="bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-md transition duration-300 mr-[15px] ml-[250px]"
-          onClick={updateUserDetails}
-        >
-          Zapisz
-        </button>
-        <button
-          className="bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-md transition duration-300 font-bold mt-0"
-          onClick={onBack}
-        >
-          X
-        </button>
-      </div>
+      <div className=" flex justify-end mb-[10px]"></div>
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-2xl font-bold text-gray-900 mb-4">{`${user.name} ${user.surname}`}</h1>
@@ -147,6 +135,12 @@ const UserDetails = ({ userId, onBack }) => {
             {user.exercises}
           </h2>
         </div>
+        <button
+          className="bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-md transition duration-300 font-bold mt-0 mb-[45px]"
+          onClick={onBack}
+        >
+          <IoMdArrowRoundBack />
+        </button>
       </div>
 
       <table className="w-full mb-4">
@@ -164,7 +158,7 @@ const UserDetails = ({ userId, onBack }) => {
               date={date}
               index={index}
               onStatusChange={handleStatusChange}
-              onDateClick={handleDateClick}
+              onNoteClick={handleNoteClick}
               note={notes[index]}
             />
           ))}
@@ -172,11 +166,19 @@ const UserDetails = ({ userId, onBack }) => {
             <td className="py-2 px-4 text-left" colSpan="2">
               Obecność
             </td>
-            <td className="py-2 px-4 text-left">{percentage}%</td>
+            <td className="py-2 px-4 text-center">{percentage}%</td>
           </tr>
         </tbody>
       </table>
-      {selectedDateIndex !== null && (
+      <div className="flex justify-center">
+        <button
+          className=" flex bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-md transition duration-300 mr-[15px]"
+          onClick={updateUserDetails}
+        >
+          Zapisz
+        </button>
+      </div>
+      {selectedNoteIndex !== null && (
         <NoteAdder onSaveNote={handleSaveNote} onCancel={handleCancelNote} />
       )}
     </div>

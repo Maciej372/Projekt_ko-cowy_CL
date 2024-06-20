@@ -1,9 +1,13 @@
 import React from "react";
 import { FcCheckmark, FcCancel } from "react-icons/fc";
 
-const TableRow = ({ date, index, onStatusChange, onDateClick, note }) => {
-  const handleStatusChange = (status) => {
-    onStatusChange(index, status);
+const TableRow = ({ date, index, onStatusChange, onNoteClick, note }) => {
+  const handleStatusChange = (event) => {
+    onStatusChange(index, event.target.value);
+  };
+
+  const handleNoteClick = () => {
+    onNoteClick(index);
   };
 
   return (
@@ -20,7 +24,6 @@ const TableRow = ({ date, index, onStatusChange, onDateClick, note }) => {
 
           color: "black",
         }}
-        onClick={() => onDateClick(index)}
       >
         <a
           href="#"
@@ -57,7 +60,13 @@ const TableRow = ({ date, index, onStatusChange, onDateClick, note }) => {
           </div>
         </button>
       </td>
-      <td className="py-2 px-4">{note?.text}</td>
+      <td className="py-2 px-4 cursor-pointer" onClick={handleNoteClick}>
+        {note.text || (
+          <button className=" text-black bg-transaprent py-2 px-4 rounded-md transition duration-300">
+            Dodaj uwagę
+          </button>
+        )}
+      </td>
     </tr>
   );
 };
