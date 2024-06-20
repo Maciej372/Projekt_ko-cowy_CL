@@ -29,85 +29,47 @@ const LoginForm = () => {
     }
   };
 
-  const styles = {
-    container: {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      height: "100vh",
-      backgroundColor: "#242424",
-      color: "#333",
-    },
-    formContainer: {
-      backgroundColor: "#fff",
-      padding: "2rem",
-      borderRadius: "8px",
-      boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
-      textAlign: "center",
-    },
-    title: {
-      marginBottom: "1.5rem",
-      color: "#333",
-    },
-    inputContainer: {
-      marginBottom: "1rem",
-      textAlign: "left",
-    },
-    input: {
-      width: "100%",
-      padding: "0.5rem",
-      borderRadius: "4px",
-      border: "1px solid #ddd",
-      backgroundColor: "grey",
-    },
-    button: {
-      width: "100%",
-      padding: "0.75rem",
-      backgroundColor: "#242424",
-      color: "#fff",
-      border: "none",
-      borderRadius: "15px",
-      cursor: "pointer",
-      fontSize: "1rem",
-    },
-    message: {
-      marginTop: "2rem",
-      color: "#242424",
-    },
-  };
-
   return (
-    <div style={styles.container}>
-      <div style={styles.formContainer}>
-        <h2 style={styles.title}>Logowanie</h2>
+    <div className="flex items-center justify-center min-h-screen bg-gray-800">
+      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+        <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
+          Logowanie
+        </h2>
         <form onSubmit={handleLogin}>
-          <div style={styles.inputContainer}>
-            <label htmlFor="username">Login:</label>
+          <div className="mb-4">
+            <label htmlFor="username" className="block text-gray-700">
+              Login:
+            </label>
             <input
               type="text"
               id="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
-              style={styles.input}
+              className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
             />
           </div>
-          <div style={styles.inputContainer}>
-            <label htmlFor="password">Hasło:</label>
+          <div className="mb-6">
+            <label htmlFor="password" className="block text-gray-700">
+              Hasło:
+            </label>
             <input
               type="password"
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              style={styles.input}
+              className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
             />
           </div>
-          <button type="submit" style={styles.button}>
+          <button
+            type="submit"
+            className="w-full bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600 transition duration-300"
+          >
             Login
           </button>
         </form>
-        {message && <p style={styles.message}>{message}</p>}
+        {message && <p className="mt-4 text-red-500 text-center">{message}</p>}
       </div>
     </div>
   );

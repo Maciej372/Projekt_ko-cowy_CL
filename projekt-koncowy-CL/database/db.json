@@ -11,38 +11,36 @@
       "id": "1",
       "name": "Adam",
       "surname": "Adamowski",
-      "exercises": "terapia ręki"
+      "exercises": "terapia ręki",
+      "start": "new Date(2024, 5, 19, 21, 9)"
     },
     {
       "id": "2",
       "name": "Jan",
       "surname": "Janowski",
-      "exercises": "logopedia"
+      "exercises": "logopedia",
+      "start": "new Date(2024, 5, 19, 21, 9)"
     },
     {
       "id": "3",
-      "name": "Tomasz",
-      "surname": "Tomkowski",
-      "exercises": "zajęcia korekcyjno-kompensacyjne"
+      "name": "Ja",
+      "surname": "Testowy",
+      "exercises": "motoryka duża",
+      "start": "new Date(2024, 6, 17, 10, 30)"
     },
     {
-      "id": "4",
-      "name": "Jacek",
-      "surname": "Jackowski",
-      "exercises": "motoryka duża"
+      "id": "8",
+      "name": "erg",
+      "surname": "ergerg",
+      "exercises": "motoryka duża",
+      "start": "new Date(2024, 6, 27, 11, 44)"
     },
     {
-      "id": "5",
-      "name": "Filip",
-      "surname": "Filipiak",
-      "exercises": "motoryka mała"
-    },
-    {
-      "id": "6",
-      "name": "ererf",
-      "surname": "erferf",
-      "exercises": "motoryka mała",
-      "start": "new Date(2024, 5, 17, 12, 0)"
+      "id": "9",
+      "name": "Maciej",
+      "surname": "Testowy",
+      "exercises": "logopedia",
+      "start": "new Date(2024, 7, 1, 13, 0)"
     }
   ]
 }

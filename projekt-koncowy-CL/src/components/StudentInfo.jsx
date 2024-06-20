@@ -1,30 +1,30 @@
 import React, { useState, useEffect } from "react";
-import { FcCheckmark } from "react-icons/fc";
-import { FcCancel } from "react-icons/fc";
+import TableRow from "./StudentInfoNotes";
+import NoteAdder from "./NoteAdder";
+import { fetchUserDetails } from "../fetchUserDetails";
 
 const UserDetails = ({ userId }) => {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
+  const [statuses, setStatuses] = useState(Array(10).fill(null));
+  const [notes, setNotes] = useState(
+    Array(10).fill({ text: "", status: null })
+  );
+  const [selectedDateIndex, setSelectedDateIndex] = useState(null);
 
   useEffect(() => {
-    const fetchUserDetails = async () => {
-      try {
-        const response = await fetch(`http://localhost:3000/users/${userId}`);
-        if (!response.ok) {
-          throw new Error("Wystąpił błąd podczas pobierania danych.");
-        }
-        const data = await response.json();
+    fetchUserDetails(
+      userId,
+      (data) => {
         setUser(data);
-      } catch (error) {
+      },
+      (error) => {
         setError(error.message);
         console.error("Błąd:", error);
       }
-    };
-
-    fetchUserDetails();
+    );
   }, [userId]);
 
-  // Funkcja do generowania kolejnych dat co 7 dni
   const generateWeeklyDates = (startDate, numberOfWeeks) => {
     const dates = [];
     const start = new Date(startDate);
@@ -36,73 +36,103 @@ const UserDetails = ({ userId }) => {
     return dates;
   };
 
-  // Funkcja do parsowania daty w formacie new Date(...)
   const parseDateFromString = (dateString) => {
     try {
-      // Przykład: "new Date(2024, 5, 17, 12, 0)"
       const datePattern = /new Date\((\d+), (\d+), (\d+), (\d+), (\d+)\)/;
       const match = dateString.match(datePattern);
 
       if (!match) throw new Error("Niepoprawny format daty");
 
       const [_, year, month, day, hours, minutes] = match.map(Number);
-
-      // Należy pamiętać, że miesiące w obiekcie Date w JavaScript są zerowane (0 - styczeń, 11 - grudzień)
       return new Date(year, month, day, hours, minutes);
     } catch (error) {
       console.error("Błąd parsowania daty:", error);
-      return new Date(); // Zwróć bieżącą datę jako domyślną
+      return new Date();
     }
   };
 
+  const handleStatusChange = (index, status) => {
+    const newStatuses = [...statuses];
+    newStatuses[index] = status;
+    const newNotes = [...notes];
+    newNotes[index] = { ...newNotes[index], status };
+    setStatuses(newStatuses);
+    setNotes(newNotes);
+  };
+
+  const handleDateClick = (index) => {
+    setSelectedDateIndex(index);
+  };
+
+  const handleSaveNote = (text) => {
+    const newNotes = [...notes];
+    newNotes[selectedDateIndex] = { ...newNotes[selectedDateIndex], text };
+    setNotes(newNotes);
+    setSelectedDateIndex(null);
+  };
+
+  const handleCancelNote = () => {
+    setSelectedDateIndex(null);
+  };
+
   if (error) {
-    return <p>Błąd: {error}</p>;
+    return <p className="text-red-500">Błąd: {error}</p>;
   }
 
   if (!user) {
-    return <p>Ładowanie danych...</p>;
+    return <p className="text-gray-700">Ładowanie danych...</p>;
   }
 
   const startDate = parseDateFromString(user.start);
-  const weeklyDates = generateWeeklyDates(startDate, 10); // Generowanie 10 tygodniowych dat
+  const weeklyDates = generateWeeklyDates(startDate, 10);
+
+  const presentCount = statuses.filter((status) => status === "present").length;
+  const percentage = (presentCount / 10) * 100;
 
   return (
-    <div>
-      <h1>{`${user.name} ${user.surname}`}</h1>
-      <h2>{user.exercises}</h2>
-      <table>
+    <div className="bg-gray-100 p-4 rounded-lg shadow-lg">
+      <div className="flex justify-between items-center">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">{`${user.name} ${user.surname}`}</h1>
+          <h2 className="text-lg font-medium text-gray-800 mb-2">
+            {user.exercises}
+          </h2>
+        </div>
+        <button className="bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-md transition duration-300">
+          Zapisz
+        </button>
+      </div>
+
+      <table className="w-full mb-4">
         <thead>
-          <tr>
-            <th>Data</th>
-            <th>Obecność</th>
-            <th>Uwagi</th>
+          <tr className="bg-gray-200">
+            <th className="py-2 px-4 text-left">Data</th>
+            <th className="py-2 px-4 text-left">Obecność</th>
+            <th className="py-2 px-4 text-left">Uwagi</th>
           </tr>
         </thead>
         <tbody>
           {weeklyDates.map((date, index) => (
-            <tr key={index}>
-              <td>
-                <a href="#" onClick={() => handleUserClick(user.id)}>
-                  {date.toLocaleDateString()}
-                </a>
-              </td>
-              <td>
-                <button
-                  style={{
-                    backgroundColor: "grey",
-                    border: "none",
-                  }}
-                >
-                  <FcCheckmark style={{ width: 30, height: 30 }} />
-                </button>
-                <button style={{ backgroundColor: "grey", border: "none" }}>
-                  <FcCancel style={{ width: 30, height: 30 }} />
-                </button>
-              </td>
-            </tr>
+            <TableRow
+              key={index}
+              date={date}
+              index={index}
+              onStatusChange={handleStatusChange}
+              onDateClick={handleDateClick}
+              note={notes[index]}
+            />
           ))}
+          <tr className="bg-gray-200">
+            <td className="py-2 px-4 text-left" colSpan="2">
+              Obecność
+            </td>
+            <td className="py-2 px-4 text-left">{percentage}%</td>
+          </tr>
         </tbody>
       </table>
+      {selectedDateIndex !== null && (
+        <NoteAdder onSaveNote={handleSaveNote} onCancel={handleCancelNote} />
+      )}
     </div>
   );
 };
