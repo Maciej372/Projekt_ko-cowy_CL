@@ -96,13 +96,12 @@ const UserTable = () => {
                   <td className="px-6 py-3">{index + 1}</td>
                   <td className="px-6 py-3">{user.name}</td>
                   <td className="px-6 py-3">
-                    <a
-                      href="#"
-                      className="text-black hover:underline"
+                    <td
+                      className="cursor-pointer"
                       onClick={() => handleUserClick(user.id)}
                     >
                       {user.surname}
-                    </a>
+                    </td>
                   </td>
                   <td className="px-6 py-4">{user.exercises}</td>
                   <td className="px-6 py-4">

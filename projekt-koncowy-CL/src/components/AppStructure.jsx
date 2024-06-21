@@ -10,6 +10,7 @@ import {
   FaList,
 } from "react-icons/fa6";
 import CoursesTable from "./Prices";
+import { GiMoneyStack } from "react-icons/gi";
 
 const MainMenu = () => {
   const navigate = useNavigate();
@@ -28,6 +29,10 @@ const MainMenu = () => {
   };
   const onPricesClick = () => {
     setCurrentView("CoursesTable");
+  };
+
+  const onSalaryClick = () => {
+    setCurrentView("");
   };
 
   return (
@@ -51,6 +56,15 @@ const MainMenu = () => {
             } hover:bg-orange-600 transition duration-300`}
           >
             <FaList className="w-[25px] h-[25px] p-[1px]" />
+          </button>
+          <button
+            onClick={onSalaryClick}
+            title="Wynagrodzenie"
+            className={`text-white px-4 py-2 rounded-md ${
+              currentView === "" ? "hidden" : "bg-orange-500"
+            } hover:bg-orange-600 transition duration-300`}
+          >
+            <GiMoneyStack className="w-[25px] h-[25px] p-[1px]" />
           </button>
           <button
             onClick={onPricesClick}

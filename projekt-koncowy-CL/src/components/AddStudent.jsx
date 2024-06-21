@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import UserTable from "./UserTable";
 import { GiSave } from "react-icons/gi";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import ExerciseSelect from "./Exercises";
 
 const AddStudents = ({ onBack }) => {
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
-  const [exercises, setExercises] = useState("...");
+  const [selectedExercise, setSelectedExercise] = useState("");
   const [lastId, setLastId] = useState(null);
   const [studentAdded, setStudentAdded] = useState(false);
   const [startDate, setStartDate] = useState("");
@@ -47,12 +48,12 @@ const AddStudents = ({ onBack }) => {
     setSurname(e.target.value);
   };
 
-  const handleExercisesChange = (e) => {
-    setExercises(e.target.value);
-  };
-
   const handleStartDateChange = (e) => {
     setStartDate(e.target.value);
+  };
+
+  const handleExerciseChange = (exercise) => {
+    setSelectedExercise(exercise);
   };
 
   const handleSubmit = async () => {
@@ -80,7 +81,7 @@ const AddStudents = ({ onBack }) => {
       }));
       formIsValid = false;
     }
-    if (exercises === "...") {
+    if (selectedExercise.trim() === "") {
       setErrors((prevErrors) => ({
         ...prevErrors,
         exercises: "Wybierz rodzaj ćwiczeń.",
@@ -122,14 +123,19 @@ const AddStudents = ({ onBack }) => {
           id: (lastId + 1).toString(),
           name,
           surname,
-          exercises,
+          exercises: selectedExercise,
           start: formattedStartDate,
         }),
       });
 
       if (response.ok) {
         setStudentAdded(true);
-        window.location.reload(); // Odśwież stronę po pomyślnym dodaniu studenta
+        setName(""); // Reset name
+        setSurname(""); // Reset surname
+        setSelectedExercise(""); // Reset selectedExercise
+        setStartDate(""); // Reset startDate
+        setStudentAdded(false); // Reset form state
+        window.location.reload();
       } else {
         console.error("Wystąpił błąd podczas dodawania studenta.");
       }
@@ -184,28 +190,13 @@ const AddStudents = ({ onBack }) => {
           {errors.surname && (
             <p className="text-red-500 text-sm">{errors.surname}</p>
           )}
-          <label htmlFor="exercises" className="block text-gray-700 mb-2 mt-4">
-            Ćwiczenia:
-          </label>
-          <select
-            id="exercises"
-            value={exercises}
-            onChange={handleExercisesChange}
-            required
-            className={`w-full px-4 py-2 rounded-md border ${
-              errors.exercises ? "border-red-500" : "border-gray-300"
-            } focus:outline-none focus:border-blue-500`}
+          <label
+            htmlFor="selectedExercise"
+            className="block text-gray-700 mb-2 mt-4"
           >
-            <option value="...">...</option>
-            <option value="terapia ręki">Terapia ręki</option>
-            <option value="logopedia">Logopedia</option>
-            <option value="zajęcia korekcyjno-kompensacyjne">
-              Zajęcia korekcyjno-kompensacyjne
-            </option>
-            <option value="motoryka duża">Motoryka duża</option>
-            <option value="motoryka mała">Motoryka mała</option>
-            <option value="kompetencje językowe">Kompetencje językowe</option>
-          </select>
+            Rodzaj ćwiczeń:
+          </label>
+          <ExerciseSelect onExerciseChange={handleExerciseChange} />
           {errors.exercises && (
             <p className="text-red-500 text-sm">{errors.exercises}</p>
           )}

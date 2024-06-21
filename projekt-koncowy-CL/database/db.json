@@ -13,6 +13,20 @@
       "surname": "Adamowski",
       "exercises": "terapia ręki",
       "start": "new Date(2024, 5, 19, 21, 9)"
+    },
+    {
+      "id": "2",
+      "name": "Ania",
+      "surname": "Pływak",
+      "exercises": "Pływanie",
+      "start": "new Date(2024, 6, 24, 15, 0)"
+    },
+    {
+      "id": "3",
+      "name": "Magda",
+      "surname": "Pływak",
+      "exercises": "Pływanie",
+      "start": "new Date(2024, 6, 28, 18, 30)"
     }
   ],
   "exercises-prices": [
@@ -51,6 +65,12 @@
       "name": "Kompetencje językowe",
       "sessions": 10,
       "pricePerSession": 100
+    },
+    {
+      "id": "7",
+      "name": "Pływanie",
+      "sessions": 10,
+      "pricePerSession": "150"
     }
   ]
 }
