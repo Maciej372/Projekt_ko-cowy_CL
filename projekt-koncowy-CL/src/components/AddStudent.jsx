@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import UserTable from "./UserTable";
 import { GiSave } from "react-icons/gi";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
-const AddStudents = () => {
+const AddStudents = ({ onBack }) => {
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [exercises, setExercises] = useState("...");
@@ -141,7 +142,18 @@ const AddStudents = () => {
     <div className="bg-gray-800 min-h-screen flex flex-col justify-start items-center">
       {!studentAdded && (
         <div className="w-full max-w-md bg-white p-4 rounded-lg shadow-lg">
-          <h2 className="text-2xl text-gray-900 mb-4">Dodaj podopiecznego</h2>
+          <div className="flex justify-between">
+            <h2 className="text-2xl text-gray-900 mb-4">
+              Dodaj <br />
+              podopiecznego
+            </h2>
+            <button
+              className="bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-md transition duration-300 font-bold mt-0 mb-[45px]"
+              onClick={onBack}
+            >
+              <IoMdArrowRoundBack />
+            </button>
+          </div>
           <label htmlFor="name" className="block text-gray-700 mb-2">
             Imię:
           </label>

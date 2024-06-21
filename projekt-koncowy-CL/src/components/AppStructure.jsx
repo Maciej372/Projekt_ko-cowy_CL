@@ -4,9 +4,11 @@ import UserTable from "./UserTable";
 import Calendar from "./Calendar";
 import UserDetails from "./StudentInfo";
 import { FaPowerOff } from "react-icons/fa";
-import { FaRegCalendarDays } from "react-icons/fa6";
-import { FaHandHoldingDollar } from "react-icons/fa6";
-import { FaList } from "react-icons/fa6";
+import {
+  FaRegCalendarDays,
+  FaHandHoldingDollar,
+  FaList,
+} from "react-icons/fa6";
 
 const MainMenu = () => {
   const navigate = useNavigate();

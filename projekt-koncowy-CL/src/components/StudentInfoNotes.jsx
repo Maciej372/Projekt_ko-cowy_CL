@@ -2,8 +2,8 @@ import React from "react";
 import { FcCheckmark, FcCancel } from "react-icons/fc";
 
 const TableRow = ({ date, index, onStatusChange, onNoteClick, note }) => {
-  const handleStatusChange = (event) => {
-    onStatusChange(index, event.target.value);
+  const handleStatusChange = (status) => {
+    onStatusChange(index, status);
   };
 
   const handleNoteClick = () => {
@@ -25,22 +25,13 @@ const TableRow = ({ date, index, onStatusChange, onNoteClick, note }) => {
           color: "black",
         }}
       >
-        <a
-          href="#"
-          onClick={(e) => {
-            e.preventDefault();
-          }}
-          style={{
-            color: "black",
-            textDecoration: "none",
-          }}
-        >
+        <p className="font-semibold text-center">
           {new Date(
             date.getFullYear(),
             date.getMonth() - 1,
             date.getDate()
           ).toLocaleDateString()}
-        </a>
+        </p>
       </td>
       <td className="py-2 px-4">
         <button
