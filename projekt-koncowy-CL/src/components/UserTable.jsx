@@ -70,7 +70,7 @@ const UserTable = () => {
   };
 
   return (
-    <div className="bg-gray-800 min-h-screen flex flex-col justify-start items-center mt-[100px]">
+    <div className="bg-gray-800 min-h-screen flex flex-col justify-center items-center">
       {currentView === "userDetails" && (
         <UserDetails userId={selectedUserId} onBack={onBack} />
       )}

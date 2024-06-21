@@ -139,7 +139,7 @@ const AddStudents = ({ onBack }) => {
   };
 
   return (
-    <div className="bg-gray-800 min-h-screen flex flex-col justify-start items-center">
+    <div className="bg-gray-800 min-h-screen flex flex-col justify-center items-center">
       {!studentAdded && (
         <div className="w-full max-w-md bg-white p-4 rounded-lg shadow-lg">
           <div className="flex justify-between">

@@ -67,13 +67,13 @@ const Calendar = () => {
   };
 
   return (
-    <div>
+    <div className="bg-gray-800 min-h-screen flex flex-col justify-center">
       <BigCalendar
         localizer={localizer}
         events={activities}
         startAccessor="start"
         endAccessor="end"
-        style={{ height: "80vh", padding: "50px", marginTop: "100px" }}
+        style={{ height: "70vh" }}
         tooltipAccessor={(event) => event.title}
         onNavigate={changeMonth} // Obsługa nawigacji kalendarza
       />

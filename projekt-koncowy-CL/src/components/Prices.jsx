@@ -8,6 +8,7 @@ const CoursesTable = () => {
   const [error, setError] = useState(null);
   const [confirmDeleteId, setConfirmDeleteId] = useState(null);
   const [currentView, setCurrentView] = useState("CoursesTable");
+  const [showAddPrices, setShowAddPrices] = useState(true);
 
   // Funkcja do wczytania danych o kursach z serwera
   const fetchCoursesData = async () => {
@@ -75,6 +76,7 @@ const CoursesTable = () => {
   // Obsługa powrotu z widoku dodawania cen zajęć
   const handleBack = () => {
     setCurrentView("CoursesTable");
+    setShowAddPrices(false);
     fetchCoursesData(); // Odświeżamy dane po powrocie z dodawania
   };
 
@@ -83,9 +85,9 @@ const CoursesTable = () => {
   }
 
   return (
-    <div className="bg-gray-800 min-h-screen flex flex-col justify-start items-center mt-[100px]">
+    <>
       {currentView === "CoursesTable" && (
-        <>
+        <div className="bg-gray-800 min-h-screen flex flex-col justify-center items-center">
           <table className="w-full max-w-screen-lg bg-white shadow-lg rounded-lg overflow-hidden">
             <thead className="bg-gray-700 text-white">
               <tr>
@@ -155,10 +157,10 @@ const CoursesTable = () => {
           >
             <FaPlus className="w-5 h-5" />
           </button>
-        </>
+        </div>
       )}
       {currentView === "AddPrices" && <AddPrices onBack={handleBack} />}
-    </div>
+    </>
   );
 };
 
