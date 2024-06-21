@@ -14,5 +14,43 @@
       "exercises": "terapia ręki",
       "start": "new Date(2024, 5, 19, 21, 9)"
     }
+  ],
+  "exercises-prices": [
+    {
+      "id": "1",
+      "name": "Terapia ręki",
+      "sessions": 10,
+      "pricePerSession": 100
+    },
+    {
+      "id": "2",
+      "name": "Logopedia",
+      "sessions": 10,
+      "pricePerSession": 100
+    },
+    {
+      "id": "3",
+      "name": "Zajęcia korekcyjno-kompensacyjne",
+      "sessions": 10,
+      "pricePerSession": 100
+    },
+    {
+      "id": "4",
+      "name": "Motoryka duża",
+      "sessions": 10,
+      "pricePerSession": 100
+    },
+    {
+      "id": "5",
+      "name": "Motoryka mała",
+      "sessions": 10,
+      "pricePerSession": 100
+    },
+    {
+      "id": "6",
+      "name": "Kompetencje językowe",
+      "sessions": 10,
+      "pricePerSession": 100
+    }
   ]
 }

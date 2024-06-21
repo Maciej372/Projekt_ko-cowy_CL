@@ -9,6 +9,7 @@ import {
   FaHandHoldingDollar,
   FaList,
 } from "react-icons/fa6";
+import CoursesTable from "./Prices";
 
 const MainMenu = () => {
   const navigate = useNavigate();
@@ -24,6 +25,9 @@ const MainMenu = () => {
 
   const onListClick = () => {
     setCurrentView("userTable");
+  };
+  const onPricesClick = () => {
+    setCurrentView("CoursesTable");
   };
 
   return (
@@ -49,9 +53,10 @@ const MainMenu = () => {
             <FaList className="w-[25px] h-[25px] p-[1px]" />
           </button>
           <button
+            onClick={onPricesClick}
             title="Cennik"
             className={`text-white px-4 py-2 rounded-md ${
-              currentView === "calendar" ? "hidden" : "bg-orange-500"
+              currentView === "CoursesTable" ? "hidden" : "bg-orange-500"
             } hover:bg-orange-600 transition duration-300`}
           >
             <FaHandHoldingDollar className="w-[25px] h-[25px] p-[1px]" />
@@ -68,6 +73,7 @@ const MainMenu = () => {
         {currentView === "calendar" && <Calendar />}
         {currentView === "userTable" && <UserTable />}
         {currentView === "userDetails" && <UserDetails />}
+        {currentView === "CoursesTable" && <CoursesTable />}
       </div>
     </div>
   );
