@@ -5,6 +5,8 @@ import UserDetails from "./StudentInfo";
 import { RiDeleteBack2Line } from "react-icons/ri";
 import { FaPlus } from "react-icons/fa";
 
+import { FaInfo } from "react-icons/fa";
+
 const UserTable = () => {
   const [users, setUsers] = useState([]);
   const [showAddStudent, setShowAddStudent] = useState(false);
@@ -70,7 +72,7 @@ const UserTable = () => {
   };
 
   return (
-    <div className="bg-gray-800 min-h-screen flex flex-col justify-center items-center">
+    <div className="bg-gray-800 min-h-screen flex flex-col justify-center items-center text-lg font-bol">
       {currentView === "userDetails" && (
         <UserDetails userId={selectedUserId} onBack={onBack} />
       )}
@@ -96,15 +98,17 @@ const UserTable = () => {
                   <td className="px-6 py-3">{index + 1}</td>
                   <td className="px-6 py-3">{user.name}</td>
                   <td className="px-6 py-3">
-                    <td
-                      className="cursor-pointer"
-                      onClick={() => handleUserClick(user.id)}
-                    >
-                      {user.surname}
-                    </td>
+                    <td>{user.surname}</td>
                   </td>
                   <td className="px-6 py-4">{user.exercises}</td>
-                  <td className="px-6 py-4">
+                  <td className="flex gap-2 p-4">
+                    <button
+                      onClick={() => handleUserClick(user.id)}
+                      title="Informacje"
+                      className="px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition duration-300"
+                    >
+                      <FaInfo className="w-[25px] h-[25px] p-[1px]" />
+                    </button>
                     <button
                       onClick={() => handleDelete(user.id)}
                       title="Usuń"

@@ -31,9 +31,9 @@ const MainMenu = () => {
     setCurrentView("CoursesTable");
   };
 
-  const onSalaryClick = () => {
-    setCurrentView("");
-  };
+  // const onSalaryClick = () => {
+  //   setCurrentView("");
+  // };
 
   return (
     <div className="bg-gray-800 min-h-screen flex flex-col justify-center items-center">
@@ -57,7 +57,7 @@ const MainMenu = () => {
           >
             <FaList className="w-[25px] h-[25px] p-[1px]" />
           </button>
-          <button
+          {/* <button
             onClick={onSalaryClick}
             title="Wynagrodzenie"
             className={`text-white px-4 py-2 rounded-md ${
@@ -65,7 +65,7 @@ const MainMenu = () => {
             } hover:bg-orange-600 transition duration-300`}
           >
             <GiMoneyStack className="w-[25px] h-[25px] p-[1px]" />
-          </button>
+          </button> */}
           <button
             onClick={onPricesClick}
             title="Cennik"

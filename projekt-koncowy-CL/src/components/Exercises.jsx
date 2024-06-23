@@ -57,7 +57,7 @@ const ExerciseSelect = ({ onExerciseChange }) => {
         } focus:outline-none focus:border-blue-500`}
       >
         <option value="" disabled>
-          Wybierz zajęcia
+          ...
         </option>
         {loading ? (
           <option value="" disabled>

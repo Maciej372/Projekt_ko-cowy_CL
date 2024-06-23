@@ -193,9 +193,7 @@ const AddStudents = ({ onBack }) => {
           <label
             htmlFor="selectedExercise"
             className="block text-gray-700 mb-2 mt-4"
-          >
-            Rodzaj ćwiczeń:
-          </label>
+          ></label>
           <ExerciseSelect onExerciseChange={handleExerciseChange} />
           {errors.exercises && (
             <p className="text-red-500 text-sm">{errors.exercises}</p>

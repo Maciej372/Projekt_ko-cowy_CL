@@ -3,6 +3,8 @@ import TableRow from "./StudentInfoNotes";
 import NoteAdder from "./NoteAdder";
 import { fetchUserDetails } from "../fetchUserDetails";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { GiMoneyStack } from "react-icons/gi";
+import UserTableWithPayments from "./Salary";
 
 const UserDetails = ({ userId, onBack }) => {
   const [user, setUser] = useState(null);
@@ -12,6 +14,8 @@ const UserDetails = ({ userId, onBack }) => {
     Array(10).fill({ text: "", status: null })
   );
   const [selectedNoteIndex, setSelectedNoteIndex] = useState(null);
+  const [currentView, setCurrentView] = useState("userDetails");
+  const [selectedUserId, setSelectedUserId] = useState(null);
 
   useEffect(() => {
     fetchUserDetails(
@@ -28,9 +32,8 @@ const UserDetails = ({ userId, onBack }) => {
     );
   }, [userId]);
 
-  // Funkcja do aktualizacji danych użytkownika na serwerze
   const updateUserDetails = () => {
-    if (!user) return; // Zabezpieczenie na wypadek, gdy user nie jest jeszcze załadowany
+    if (!user) return;
 
     const updatedUser = {
       ...user,
@@ -55,6 +58,7 @@ const UserDetails = ({ userId, onBack }) => {
       })
       .then((data) => {
         console.log("Dane użytkownika zostały zaktualizowane:", data);
+        alert("Dane użytkownika zostały pomyślnie zapisane.");
       })
       .catch((error) => {
         console.error("Błąd podczas aktualizacji danych użytkownika:", error);
@@ -111,6 +115,15 @@ const UserDetails = ({ userId, onBack }) => {
     setSelectedNoteIndex(null);
   };
 
+  const handleSalaryClick = (id) => {
+    if (currentView === "UserSalaryDetails") {
+      setCurrentView("userDetails");
+    } else {
+      setSelectedUserId(id);
+      setCurrentView("UserSalaryDetails");
+    }
+  };
+
   if (error) {
     return <p className="text-red-500">Błąd: {error}</p>;
   }
@@ -126,60 +139,76 @@ const UserDetails = ({ userId, onBack }) => {
   const percentage = (presentCount / 10) * 100;
 
   return (
-    <div className="bg-gray-100 p-4 rounded-lg shadow-lg">
-      <div className=" flex justify-end mb-[10px]"></div>
-      <div className="flex justify-between items-center">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">{`${user.name} ${user.surname}`}</h1>
-          <h2 className="text-lg font-medium text-gray-800 mb-2">
-            {user.exercises}
-          </h2>
+    <div className="flex">
+      <div className="bg-gray-100 p-4 rounded-lg shadow-lg mr-4">
+        <div className="flex justify-end mb-[10px]"></div>
+        <div className="flex justify-between items-center">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900 mb-4">{`${user.name} ${user.surname}`}</h1>
+            <h2 className="text-lg font-medium text-gray-800 mb-2">
+              {user.exercises}
+            </h2>
+          </div>
+          <div className="flex gap-2">
+            <button
+              onClick={() => handleSalaryClick(user.id)}
+              title="Wynagrodzenie"
+              className="bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-md transition duration-300 font-bold mt-0 mb-[45px]"
+            >
+              <GiMoneyStack />
+            </button>
+            <button
+              className="bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-md transition duration-300 font-bold mt-0 mb-[45px]"
+              onClick={onBack}
+            >
+              <IoMdArrowRoundBack />
+            </button>
+          </div>
         </div>
-        <button
-          className="bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-md transition duration-300 font-bold mt-0 mb-[45px]"
-          onClick={onBack}
-        >
-          <IoMdArrowRoundBack />
-        </button>
-      </div>
 
-      <table className="w-full mb-4">
-        <thead>
-          <tr className="bg-gray-200">
-            <th className="py-2 px-4 text-left">Data</th>
-            <th className="py-2 px-4 text-left">Obecność</th>
-            <th className="py-2 px-4 text-left">Uwagi</th>
-          </tr>
-        </thead>
-        <tbody>
-          {weeklyDates.map((date, index) => (
-            <TableRow
-              key={index}
-              date={date}
-              index={index}
-              onStatusChange={handleStatusChange}
-              onNoteClick={handleNoteClick}
-              note={notes[index]}
-            />
-          ))}
-          <tr className="bg-gray-200">
-            <td className="py-2 px-4 text-left" colSpan="2">
-              Obecność
-            </td>
-            <td className="py-2 px-4 text-center">{percentage}%</td>
-          </tr>
-        </tbody>
-      </table>
-      <div className="flex justify-center">
-        <button
-          className=" flex bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-md transition duration-300 mr-[15px]"
-          onClick={updateUserDetails}
-        >
-          Zapisz
-        </button>
+        <table className="w-full mb-4">
+          <thead>
+            <tr className="bg-gray-200">
+              <th className="py-2 px-4 text-left">Data</th>
+              <th className="py-2 px-4 text-left">Obecność</th>
+              <th className="py-2 px-4 text-left">Uwagi</th>
+            </tr>
+          </thead>
+          <tbody>
+            {weeklyDates.map((date, index) => (
+              <TableRow
+                key={index}
+                date={date}
+                index={index}
+                onStatusChange={handleStatusChange}
+                onNoteClick={handleNoteClick}
+                note={notes[index]}
+              />
+            ))}
+            <tr className="bg-gray-200">
+              <td className="py-2 px-4 text-left" colSpan="2">
+                Obecność
+              </td>
+              <td className="py-2 px-4 text-center">{percentage}%</td>
+            </tr>
+          </tbody>
+        </table>
+        <div className="flex justify-center">
+          <button
+            className="flex bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-md transition duration-300 mr-[15px]"
+            onClick={updateUserDetails}
+          >
+            Zapisz
+          </button>
+        </div>
+        {selectedNoteIndex !== null && (
+          <NoteAdder onSaveNote={handleSaveNote} onCancel={handleCancelNote} />
+        )}
       </div>
-      {selectedNoteIndex !== null && (
-        <NoteAdder onSaveNote={handleSaveNote} onCancel={handleCancelNote} />
+      {currentView === "UserSalaryDetails" && (
+        <div className="flex justify-end">
+          <UserTableWithPayments userId={selectedUserId} />
+        </div>
       )}
     </div>
   );

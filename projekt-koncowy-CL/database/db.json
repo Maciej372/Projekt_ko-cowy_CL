@@ -12,21 +12,122 @@
       "name": "Adam",
       "surname": "Adamowski",
       "exercises": "terapia ręki",
-      "start": "new Date(2024, 5, 19, 21, 9)"
+      "start": "new Date(2024, 5, 19, 21, 9)",
+      "statuses": [
+        "present",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "notes": [
+        {
+          "text": "wegergewrgf",
+          "status": "present"
+        },
+        {
+          "text": "",
+          "status": null
+        },
+        {
+          "text": "",
+          "status": null
+        },
+        {
+          "text": "",
+          "status": null
+        },
+        {
+          "text": "",
+          "status": null
+        },
+        {
+          "text": "",
+          "status": null
+        },
+        {
+          "text": "",
+          "status": null
+        },
+        {
+          "text": "",
+          "status": null
+        },
+        {
+          "text": "",
+          "status": null
+        },
+        {
+          "text": "",
+          "status": null
+        }
+      ]
     },
     {
       "id": "2",
-      "name": "Ania",
-      "surname": "Pływak",
-      "exercises": "Pływanie",
-      "start": "new Date(2024, 6, 24, 15, 0)"
-    },
-    {
-      "id": "3",
-      "name": "Magda",
-      "surname": "Pływak",
-      "exercises": "Pływanie",
-      "start": "new Date(2024, 6, 28, 18, 30)"
+      "name": "Ignacy",
+      "surname": "Nowy",
+      "exercises": "Balet",
+      "start": "new Date(2024, 6, 30, 15, 40)",
+      "statuses": [
+        "absent",
+        "present",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent"
+      ],
+      "notes": [
+        {
+          "text": "",
+          "status": "absent"
+        },
+        {
+          "text": "",
+          "status": "present"
+        },
+        {
+          "text": "",
+          "status": "absent"
+        },
+        {
+          "text": "",
+          "status": "absent"
+        },
+        {
+          "text": "",
+          "status": "absent"
+        },
+        {
+          "text": "",
+          "status": "absent"
+        },
+        {
+          "text": "",
+          "status": "absent"
+        },
+        {
+          "text": "",
+          "status": "absent"
+        },
+        {
+          "text": "",
+          "status": "absent"
+        },
+        {
+          "text": "",
+          "status": "absent"
+        }
+      ]
     }
   ],
   "exercises-prices": [
@@ -67,10 +168,10 @@
       "pricePerSession": 100
     },
     {
-      "id": "7",
-      "name": "Pływanie",
-      "sessions": 10,
-      "pricePerSession": "150"
+      "id": "8",
+      "name": "Balet",
+      "sessions": 15,
+      "pricePerSession": "100"
     }
   ]
 }
