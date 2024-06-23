@@ -77,7 +77,7 @@
       "statuses": [
         "absent",
         "present",
-        "absent",
+        "present",
         "absent",
         "absent",
         "absent",
@@ -97,7 +97,7 @@
         },
         {
           "text": "",
-          "status": "absent"
+          "status": "present"
         },
         {
           "text": "",

@@ -6,22 +6,17 @@ const UserTableWithPayments = ({ userId }) => {
   const [loading, setLoading] = useState(true);
 
   const parseDateFromString = (dateString) => {
-    try {
-      if (!dateString.startsWith("new Date(")) {
-        throw new Error("Niepoprawny format daty");
-      }
-
-      const dateParts = dateString.match(/\d+/g).map(Number);
-      if (dateParts.length !== 5) {
-        throw new Error("Niepoprawny format daty");
-      }
-
-      const [year, month, day, hours, minutes] = dateParts;
-      return new Date(year, month - 1, day, hours, minutes);
-    } catch (error) {
-      console.error("Błąd parsowania daty:", error);
+    const match = dateString.match(/^new Date\((.*)\)$/);
+    if (!match) {
+      console.error("Niepoprawny format daty");
       return new Date();
     }
+
+    const [, dateArgs] = match;
+    const dateParts = dateArgs.split(",").map(Number);
+
+    const [year, month, day, hours, minutes] = dateParts;
+    return new Date(year, month - 1, day, hours, minutes);
   };
 
   const generateWeeklyDates = (startDate, numberOfWeeks) => {
@@ -113,8 +108,6 @@ const UserTableWithPayments = ({ userId }) => {
             ? exercisePrice.toLocaleString("pl-PL", {
                 style: "currency",
                 currency: "PLN",
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
               })
             : "0,00 zł"}
         </td>
@@ -126,8 +119,6 @@ const UserTableWithPayments = ({ userId }) => {
     const totalPayments = calculateTotalPayments().toLocaleString("pl-PL", {
       style: "currency",
       currency: "PLN",
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
     });
 
     return (
