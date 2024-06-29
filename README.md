@@ -1,1 +1,1 @@
-# Projekt_ko-cowy_CL
+# Projekt_koncowy_CL
