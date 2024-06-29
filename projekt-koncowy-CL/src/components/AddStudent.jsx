@@ -57,7 +57,6 @@ const AddStudents = ({ onBack }) => {
   };
 
   const handleSubmit = async () => {
-    // Resetowanie stanu błędów
     setErrors({
       name: "",
       surname: "",
@@ -100,10 +99,6 @@ const AddStudents = ({ onBack }) => {
       return;
     }
 
-    if (lastId === null) {
-      console.error("Nie można dodawać użytkowników. Brak danych o ID.");
-      return;
-    }
     const convertToServerDateFormat = (dateString) => {
       const date = new Date(dateString);
       return `new Date(${date.getFullYear()}, ${
@@ -130,11 +125,11 @@ const AddStudents = ({ onBack }) => {
 
       if (response.ok) {
         setStudentAdded(true);
-        setName(""); // Reset name
-        setSurname(""); // Reset surname
-        setSelectedExercise(""); // Reset selectedExercise
-        setStartDate(""); // Reset startDate
-        setStudentAdded(false); // Reset form state
+        setName("");
+        setSurname("");
+        setSelectedExercise("");
+        setStartDate("");
+        setStudentAdded(false);
         window.location.reload();
       } else {
         console.error("Wystąpił błąd podczas dodawania studenta.");

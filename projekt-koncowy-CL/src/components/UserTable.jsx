@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import AddStudents from "./AddStudent";
 import UserDetails from "./StudentInfo";
 import { RiDeleteBack2Line } from "react-icons/ri";
-import { FaPlus } from "react-icons/fa";
-
-import { FaInfo } from "react-icons/fa";
+import { FaPlus, FaInfo } from "react-icons/fa";
 
 const UserTable = () => {
   const [users, setUsers] = useState([]);
@@ -29,8 +26,6 @@ const UserTable = () => {
 
     fetchUsers();
   }, []);
-
-  const navigate = useNavigate();
 
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm(

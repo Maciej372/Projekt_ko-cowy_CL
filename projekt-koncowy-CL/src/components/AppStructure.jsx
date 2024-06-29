@@ -83,7 +83,6 @@ const MainMenu = () => {
             <FaPowerOff className="w-[25px] h-[25px] p-[1px]" />
           </button>
         </div>
-        {/* Renderowanie komponentów na podstawie stanu */}
         {currentView === "calendar" && <Calendar />}
         {currentView === "userTable" && <UserTable />}
         {currentView === "userDetails" && <UserDetails />}

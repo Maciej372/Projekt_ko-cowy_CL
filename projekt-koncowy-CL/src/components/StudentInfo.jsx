@@ -56,8 +56,7 @@ const UserDetails = ({ userId, onBack }) => {
         }
         return response.json();
       })
-      .then((data) => {
-        console.log("Dane użytkownika zostały zaktualizowane:", data);
+      .then(() => {
         alert("Dane użytkownika zostały pomyślnie zapisane.");
       })
       .catch((error) => {

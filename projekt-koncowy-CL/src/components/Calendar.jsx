@@ -8,14 +8,9 @@ const localizer = momentLocalizer(moment);
 
 const fetchAndTransformUsers = async (startDate) => {
   const url = `http://localhost:3000/users?startDate=${startDate}`;
-
   const response = await fetch(url);
-
   const users = await response.json();
-  console.log("Dane użytkowników:", users);
-  // Przekształcenie danych na wymagany format
   const transformedEvents = users.map((user) => {
-    // Parsowanie daty
     const startDate = parseDate(user.start);
     return {
       id: user.id,
@@ -24,19 +19,15 @@ const fetchAndTransformUsers = async (startDate) => {
       end: new Date(startDate.getTime() + 60 * 60 * 1000),
     };
   });
-
   return transformedEvents;
 };
 
-// Funkcja do parsowania daty w formacie "new Date(...)"
 const parseDate = (dateString) => {
-  // Usuń "new Date(" i ")" oraz podziel argumenty daty
   const dateArgs = dateString
     .replace("new Date(", "")
     .replace(")", "")
     .split(", ");
 
-  // Utwórz nową datę z argumentów
   const parsedDate = new Date(
     parseInt(dateArgs[0]), // Rok
     parseInt(dateArgs[1]) - 1,
@@ -50,7 +41,7 @@ const parseDate = (dateString) => {
 
 const Calendar = () => {
   const [activities, setActivities] = useState([]);
-  const [currentDate, setCurrentDate] = useState(new Date()); // Ustawienie początkowej daty na bieżącą
+  const [currentDate, setCurrentDate] = useState(new Date());
 
   useEffect(() => {
     const fetchData = async () => {
@@ -59,7 +50,7 @@ const Calendar = () => {
     };
 
     fetchData();
-  }, [currentDate]); // Wywołanie efektu za każdym razem, gdy zmienia się currentDate
+  }, [currentDate]);
 
   const changeMonth = (date) => {
     const nextMonth = new Date(date.getFullYear(), date.getMonth() + 1);
@@ -75,7 +66,7 @@ const Calendar = () => {
         endAccessor="end"
         style={{ height: "70vh" }}
         tooltipAccessor={(event) => event.title}
-        onNavigate={changeMonth} // Obsługa nawigacji kalendarza
+        onNavigate={changeMonth}
       />
     </div>
   );

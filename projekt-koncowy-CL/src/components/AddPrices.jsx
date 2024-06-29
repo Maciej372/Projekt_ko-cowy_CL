@@ -5,7 +5,7 @@ import CoursesTable from "./Prices";
 
 const AddPrices = ({ onBack, onPriceAdded }) => {
   const [name, setName] = useState("");
-  const [sessions, setSessions] = useState(1); // Domyślnie ustawiamy na 1
+  const [sessions, setSessions] = useState(1);
   const [pricePerSession, setPricePerSession] = useState("");
   const [lastId, setLastId] = useState(null);
   const [errors, setErrors] = useState({
@@ -13,7 +13,7 @@ const AddPrices = ({ onBack, onPriceAdded }) => {
     sessions: "",
     pricePerSession: "",
   });
-  const [priceAdded, setPriceAdded] = useState(false); // Stan informujący o dodaniu ceny
+  const [priceAdded, setPriceAdded] = useState(false);
 
   useEffect(() => {
     const fetchLastId = async () => {
@@ -42,7 +42,7 @@ const AddPrices = ({ onBack, onPriceAdded }) => {
   };
 
   const handleSessionsChange = (e) => {
-    setSessions(parseInt(e.target.value)); // Parsowanie wartości na liczbę całkowitą
+    setSessions(parseInt(e.target.value));
   };
 
   const handlePricePerSession = (e) => {
@@ -50,14 +50,12 @@ const AddPrices = ({ onBack, onPriceAdded }) => {
   };
 
   const handleSubmit = async () => {
-    // Resetowanie stanu błędów
     setErrors({
       name: "",
       sessions: "",
       pricePerSession: "",
     });
 
-    // Walidacja pól
     let formIsValid = true;
     if (name.trim() === "") {
       setErrors((prevErrors) => ({
@@ -79,11 +77,6 @@ const AddPrices = ({ onBack, onPriceAdded }) => {
       return;
     }
 
-    if (lastId === null) {
-      console.error("Nie można dodawać ceny zajęć. Brak danych o ID.");
-      return;
-    }
-
     try {
       const response = await fetch("http://localhost:3000/exercises-prices", {
         method: "POST",
@@ -99,9 +92,7 @@ const AddPrices = ({ onBack, onPriceAdded }) => {
       });
 
       if (response.ok) {
-        // Po pomyślnym dodaniu, możemy wykonać odpowiednie akcje
-        console.log("Pomyślnie dodano nową pozycję do exercises-prices.");
-        setPriceAdded(true); // Ustawienie stanu informującego o dodaniu ceny
+        setPriceAdded(true);
       } else {
         console.error("Wystąpił błąd podczas dodawania pozycji.");
       }

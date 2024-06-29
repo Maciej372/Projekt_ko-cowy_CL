@@ -128,6 +128,67 @@
           "status": "absent"
         }
       ]
+    },
+    {
+      "id": "3",
+      "name": "Maciej",
+      "surname": "Testowy",
+      "exercises": "Balet",
+      "start": "new Date(2024, 7, 3, 10, 0)",
+      "statuses": [
+        "present",
+        "absent",
+        "present",
+        "present",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "notes": [
+        {
+          "text": "",
+          "status": "present"
+        },
+        {
+          "text": "",
+          "status": "absent"
+        },
+        {
+          "text": "",
+          "status": "present"
+        },
+        {
+          "text": "",
+          "status": "present"
+        },
+        {
+          "text": "",
+          "status": null
+        },
+        {
+          "text": "",
+          "status": null
+        },
+        {
+          "text": "",
+          "status": null
+        },
+        {
+          "text": "",
+          "status": null
+        },
+        {
+          "text": "",
+          "status": null
+        },
+        {
+          "text": "",
+          "status": null
+        }
+      ]
     }
   ],
   "exercises-prices": [
@@ -166,12 +227,6 @@
       "name": "Kompetencje językowe",
       "sessions": 10,
       "pricePerSession": 100
-    },
-    {
-      "id": "8",
-      "name": "Balet",
-      "sessions": 15,
-      "pricePerSession": "100"
     }
   ]
 }

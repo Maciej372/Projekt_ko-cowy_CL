@@ -10,7 +10,6 @@ const CoursesTable = () => {
   const [currentView, setCurrentView] = useState("CoursesTable");
   const [showAddPrices, setShowAddPrices] = useState(true);
 
-  // Funkcja do wczytania danych o kursach z serwera
   const fetchCoursesData = async () => {
     try {
       const response = await fetch("http://localhost:3000/exercises-prices");
@@ -25,12 +24,10 @@ const CoursesTable = () => {
     }
   };
 
-  // Używamy useEffect, aby pobrać dane po zamontowaniu komponentu
   useEffect(() => {
     fetchCoursesData();
   }, []);
 
-  // Funkcja do usuwania kursu
   const deleteCourse = async (id) => {
     try {
       const response = await fetch(
@@ -41,48 +38,36 @@ const CoursesTable = () => {
       );
 
       if (!response.ok) {
-        if (response.status === 404) {
-          throw new Error("Kurs nie został znaleziony.");
-        }
         throw new Error(`Błąd podczas usuwania kursu: ${response.statusText}`);
       }
 
-      // Aktualizujemy stan, usuwając kurs z listy
       setCourses((prevCourses) =>
         prevCourses.filter((course) => course.id !== id)
       );
-      setConfirmDeleteId(null); // Resetujemy stan potwierdzenia usunięcia
+      setConfirmDeleteId(null);
     } catch (error) {
       setError(error.message);
       console.error("Błąd:", error);
     }
   };
 
-  // Funkcja obsługująca kliknięcie przycisku usunięcia
   const handleDeleteClick = (id) => {
-    setConfirmDeleteId(id); // Ustawiamy id kursu do potwierdzenia usunięcia
+    setConfirmDeleteId(id);
   };
 
-  // Funkcja potwierdzająca usunięcie
   const confirmDelete = () => {
     deleteCourse(confirmDeleteId);
   };
 
-  // Funkcja obsługująca dodawanie nowych cen zajęć
   const handleAdd = () => {
     setCurrentView("AddPrices");
   };
 
-  // Obsługa powrotu z widoku dodawania cen zajęć
   const handleBack = () => {
     setCurrentView("CoursesTable");
     setShowAddPrices(false);
-    fetchCoursesData(); // Odświeżamy dane po powrocie z dodawania
+    fetchCoursesData();
   };
-
-  if (error) {
-    return <p className="text-red-500">{error}</p>;
-  }
 
   return (
     <>
